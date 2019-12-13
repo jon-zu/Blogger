@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.Rider2019.2/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.2/system/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_Blogger.-2077737479.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.2.0/build/netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.13.0/build/netcoreapp1.0/nunit.engine.netstandard.dll" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="Blogger" t="IncludeRecursive">
+        <e p="Authorization" t="Include">
+          <e p="BlogAuthorizationHandler.cs" t="Include" />
+          <e p="Operations.cs" t="Include" />
+        </e>
+        <e p="Blogger.csproj" t="IncludeRecursive" />
+        <e p="Controller" t="Include">
+          <e p="ArticleController.cs" t="Include" />
+          <e p="BlogBaseController.cs" t="Include" />
+          <e p="BlogController.cs" t="Include" />
+          <e p="CommentController.cs" t="Include" />
+          <e p="UserController.cs" t="Include" />
+        </e>
+        <e p="Data" t="Include">
+          <e p="Article.cs" t="Include" />
+          <e p="Blog.cs" t="Include" />
+          <e p="BlogContext.cs" t="Include" />
+          <e p="Comment.cs" t="Include" />
+          <e p="OwnedEntity.cs" t="Include" />
+          <e p="Role.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20191211021124_InitialCreate.Designer.cs" t="Include" />
+          <e p="20191211021124_InitialCreate.cs" t="Include" />
+          <e p="BlogContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Seeder.cs" t="Include" />
+        <e p="Startup.cs" t="Include" />
+        <e p="View" t="Include">
+          <e p="ArticleCreateView.cs" t="Include" />
+          <e p="ArticleView.cs" t="Include" />
+          <e p="AuthTokenView.cs" t="Include" />
+          <e p="BlogCreateView.cs" t="Include" />
+          <e p="BlogView.cs" t="Include" />
+          <e p="CommentCreateView.cs" t="Include" />
+          <e p="CommentView.cs" t="Include" />
+          <e p="LoginInputView.cs" t="Include" />
+          <e p="UserView.cs" t="Include" />
+        </e>
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Blogger.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Blogger.Tests" t="IncludeRecursive">
+        <e p="Blogger.Tests.csproj" t="IncludeRecursive" />
+        <e p="Integration" t="Include">
+          <e p="BlogControllerTest.cs" t="Include" />
+          <e p="TestingWebAppFactory.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.0" t="Include">
+              <e p="Blogger.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Blogger.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
