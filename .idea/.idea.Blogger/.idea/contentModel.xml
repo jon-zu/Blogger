@@ -54,6 +54,312 @@
           <e p="LoginInputView.cs" t="Include" />
           <e p="UserView.cs" t="Include" />
         </e>
+        <e p="WebApp" t="Include">
+          <e p="React" t="Include">
+            <e p="dist" t="Include">
+              <e p="components" t="Include">
+                <e p="App.js" t="Include" />
+                <e p="App.js.map" t="Include" />
+                <e p="Footer.js" t="Include" />
+                <e p="Footer.js.map" t="Include" />
+                <e p="Hello.js" t="Include" />
+                <e p="Hello.js.map" t="Include" />
+                <e p="Link.js" t="Include" />
+                <e p="Link.js.map" t="Include" />
+                <e p="Todo.js" t="Include" />
+                <e p="Todo.js.map" t="Include" />
+                <e p="TodoList.js" t="Include" />
+                <e p="TodoList.js.map" t="Include" />
+              </e>
+              <e p="container" t="Include">
+                <e p="VisibleTodoList.js" t="Include" />
+                <e p="VisibleTodoList.js.map" t="Include" />
+              </e>
+              <e p="index.js" t="Include" />
+              <e p="index.js.map" t="Include" />
+              <e p="main.js" t="Include" />
+              <e p="main.js.map" t="Include" />
+              <e p="store" t="Include">
+                <e p="index.js" t="Include" />
+                <e p="index.js.map" t="Include" />
+                <e p="todo" t="Include">
+                  <e p="actions.js" t="Include" />
+                  <e p="actions.js.map" t="Include" />
+                  <e p="reducers.js" t="Include" />
+                  <e p="reducers.js.map" t="Include" />
+                  <e p="types.js" t="Include" />
+                  <e p="types.js.map" t="Include" />
+                </e>
+                <e p="visibility" t="Include">
+                  <e p="actions.js" t="Include" />
+                  <e p="actions.js.map" t="Include" />
+                  <e p="reducers.js" t="Include" />
+                  <e p="reducers.js.map" t="Include" />
+                  <e p="types.js" t="Include" />
+                  <e p="types.js.map" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="index.html" t="Include" />
+            <e p="node_modules" t="Include">
+              <e p=".cache" t="Include">
+                <e p="terser-webpack-plugin" t="Include">
+                  <e p="content-v2" t="Include">
+                    <e p="sha512" t="Include">
+                      <e p="09" t="Include">
+                        <e p="ed" t="Include">
+                          <e p="bf61a4abb1dce4dd19948130d1d82a3c8de2b0724e06be03950a6e19a7b8560bf5e2aa3c7ae565d25d41c5f425465fee4577786317ef9a2e4564632b6d38" t="Include" />
+                        </e>
+                      </e>
+                      <e p="27" t="Include">
+                        <e p="e6" t="Include">
+                          <e p="f0ce72a77e3d81614e4000232fb135199e1e036827332c9f20a4dfaed6433ee6d10ae104b05c53ec539b197f4142c38af9965641578f9d37604f1f27c8b8" t="Include" />
+                        </e>
+                      </e>
+                      <e p="2e" t="Include">
+                        <e p="b1" t="Include">
+                          <e p="5859e7b6d6cac25ce9a120adeb65bb5171e449fd61f9ac78624812500a1d2a8145953bef855ef9cc110eace1f4b554777e66cc7461caf391dab62043f0e7" t="Include" />
+                        </e>
+                      </e>
+                      <e p="39" t="Include">
+                        <e p="1d" t="Include">
+                          <e p="3d531e92e950bc36c5daa653a22061a3fd790e40bd19182876279315937aef7d13479b587214d7d4c4b6a567d7ddb46a236bc2a2d1b88290baaabca19435" t="Include" />
+                        </e>
+                      </e>
+                      <e p="51" t="Include">
+                        <e p="7d" t="Include">
+                          <e p="09310e99328a37de645e0b0aef6860f2deb394ffc44a59a64c80b1724efdd7b72287516c868a9690840d441d043d245c90e991be98fa0ee70a1f6f7c493b" t="Include" />
+                        </e>
+                      </e>
+                      <e p="63" t="Include">
+                        <e p="66" t="Include">
+                          <e p="495ade42f0c7b93d5c0b0c1e695943448da7dd5b6557bb03e1d49e455a8d9a5791b7c73cae964482719aee4d8afd72e4e7ea9e611d550baf0128272433e2" t="Include" />
+                        </e>
+                      </e>
+                      <e p="85" t="Include">
+                        <e p="bb" t="Include">
+                          <e p="1aab54a585e1bb67b2b630ea65787711c22c9ed9f371d3dc3a03e38096b8dd768c00e52f38e137ceec67b960f728a393194aecdcc9f38583300e33a5fe8a" t="Include" />
+                        </e>
+                      </e>
+                      <e p="8d" t="Include">
+                        <e p="e7" t="Include">
+                          <e p="7d593ac42a1467b60b7517909f4d65a2f28f8678ae5243ed452429e83ba0bedc8d551962e2b09a04fe7f6bf4a583814751e9dd4d0655b0981df276ca389a" t="Include" />
+                        </e>
+                      </e>
+                      <e p="93" t="Include">
+                        <e p="8a" t="Include">
+                          <e p="7b1158a6a9f4c784f9cf2317046780a11e5be0b44b0da8da7b4c18c07c57415ec32a922ede4f36713685f5ac305d8110fbff4394c14f1a3ed9650e6a8945" t="Include" />
+                        </e>
+                      </e>
+                      <e p="aa" t="Include">
+                        <e p="4c" t="Include">
+                          <e p="51200129e12e84e73126b4f3895f2e7f38974a7fff735edfbf8820de613b66625e69ef6f57ceb82629349cc0d9a4293fb6e979c8ce5d1541e3938ab398af" t="Include" />
+                        </e>
+                      </e>
+                      <e p="b4" t="Include">
+                        <e p="47" t="Include">
+                          <e p="9058b92a14d70ca481e37942d69e05fa53a7f063315482ef60b7e3865e12fd4301e274f8fb7e96f2e2848b5ca4d0ea185f533947c8b7bc50ef8abe80a78c" t="Include" />
+                        </e>
+                      </e>
+                      <e p="b6" t="Include">
+                        <e p="22" t="Include">
+                          <e p="191ce7a3426a447da4a41c9fbb783db203837cfa38f87cc983b12dd4ffe7d56f91ff0b13e6c8e0ea6310e06749fa793247295a7e62e070a9a74d25ccb325" t="Include" />
+                        </e>
+                      </e>
+                      <e p="c5" t="Include">
+                        <e p="33" t="Include">
+                          <e p="2c53b90251c70917904f768591cd30b1008c9f9d0a062b51f41df9ff784a5eba099eb6c8c5232b5a9afb3e7b2ca79e4f81c071f39d4580a6e007cf4df4c7" t="Include" />
+                        </e>
+                      </e>
+                      <e p="fa" t="Include">
+                        <e p="cb" t="Include">
+                          <e p="970c422497b9bd63069c30d0caf3850a6387a7ac24e94e49f43508a371ec2d1d0f4a10cb70d14f609e52af55ee7b36bedd5a6b3f10f2d6e5a45da03357b4" t="Include" />
+                        </e>
+                      </e>
+                    </e>
+                  </e>
+                  <e p="index-v5" t="Include">
+                    <e p="03" t="Include">
+                      <e p="38" t="Include">
+                        <e p="2e2ca99100d0f9d0f3891d3de6318eeb19e61b5d9147e82f27ef54bfd393" t="Include" />
+                      </e>
+                    </e>
+                    <e p="0d" t="Include">
+                      <e p="c2" t="Include">
+                        <e p="792be8eca749489e641edb4e8e1346feaec1e85919841c8db803d8d44903" t="Include" />
+                      </e>
+                    </e>
+                    <e p="22" t="Include">
+                      <e p="b9" t="Include">
+                        <e p="14667a42e6d570259420406a6908c730fb2f592509e193cd760cb37e6779" t="Include" />
+                      </e>
+                    </e>
+                    <e p="34" t="Include">
+                      <e p="f5" t="Include">
+                        <e p="d88d78f5d53fa9a181209699d99f65c114d7b93d00463e975600cbd366b4" t="Include" />
+                      </e>
+                    </e>
+                    <e p="56" t="Include">
+                      <e p="51" t="Include">
+                        <e p="cb73723c31eded0bc2875054fb1143d6a011e7d35105da9e957a921d3037" t="Include" />
+                      </e>
+                      <e p="cc" t="Include">
+                        <e p="bf6c70f01cb830cfbafc2f21002fb8c2c19452ac7711ff009260e80975a0" t="Include" />
+                      </e>
+                    </e>
+                    <e p="5f" t="Include">
+                      <e p="46" t="Include">
+                        <e p="cdb64d8c153b96dcf6ebfbce19a4bf18864235895be1173e070ad876739a" t="Include" />
+                      </e>
+                    </e>
+                    <e p="72" t="Include">
+                      <e p="65" t="Include">
+                        <e p="878879a7afe99a382649896afdf5605ac378fa0c068d1e65c4964c833f9d" t="Include" />
+                      </e>
+                    </e>
+                    <e p="7a" t="Include">
+                      <e p="62" t="Include">
+                        <e p="d53357a20e72ef5f116ad17784b57c188769b41d183f8182400198d4b6ba" t="Include" />
+                      </e>
+                    </e>
+                    <e p="7f" t="Include">
+                      <e p="6c" t="Include">
+                        <e p="237ebb555c49914083934d9bf50d197208f01636e0fc0b1d9d1a65b89e52" t="Include" />
+                      </e>
+                    </e>
+                    <e p="a1" t="Include">
+                      <e p="5e" t="Include">
+                        <e p="2957bc88c85f166211ac1a90b48270b9dc99d6fba9ae7433bc8dca09182f" t="Include" />
+                      </e>
+                    </e>
+                    <e p="a4" t="Include">
+                      <e p="75" t="Include">
+                        <e p="795dd21feba80f15beae9fa407731f4b426c605592f44e1e05d1e8298121" t="Include" />
+                      </e>
+                    </e>
+                    <e p="ea" t="Include">
+                      <e p="f5" t="Include">
+                        <e p="96b49b1146c73ca5d47c72a71fadf917bf93a823e50dfa30f614dbfeeaf6" t="Include" />
+                      </e>
+                    </e>
+                    <e p="f9" t="Include">
+                      <e p="5a" t="Include">
+                        <e p="fa77e665cd54581560331215b491c76bd854ca16de4be5d8199a5b98ddac" t="Include" />
+                      </e>
+                    </e>
+                  </e>
+                </e>
+              </e>
+              <e p="@types" t="IncludeRecursive">
+                <e p="hoist-non-react-statics" t="IncludeRecursive" />
+                <e p="prop-types" t="IncludeRecursive" />
+                <e p="react" t="IncludeRecursive" />
+                <e p="react-dom" t="IncludeRecursive" />
+                <e p="react-redux" t="IncludeRecursive" />
+              </e>
+              <e p="chalk" t="IncludeRecursive" />
+              <e p="chokidar" t="IncludeRecursive" />
+              <e p="csstype" t="IncludeRecursive" />
+              <e p="hoist-non-react-statics" t="IncludeRecursive" />
+              <e p="react" t="IncludeRecursive" />
+              <e p="react-dom" t="IncludeRecursive" />
+              <e p="react-redux" t="IncludeRecursive" />
+              <e p="redux" t="IncludeRecursive" />
+              <e p="redux-devtools" t="IncludeRecursive" />
+              <e p="source-map-loader" t="IncludeRecursive" />
+              <e p="symbol-observable" t="IncludeRecursive" />
+              <e p="ts-loader" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.dom.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.dom.iterable.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.collection.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.core.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.generator.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.iterable.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.promise.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.proxy.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.reflect.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.symbol.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2015.symbol.wellknown.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2016.array.include.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2016.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2016.full.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2017.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2017.full.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2017.intl.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2017.object.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2017.sharedmemory.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2017.string.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2017.typedarrays.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2018.asyncgenerator.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2018.asynciterable.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2018.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2018.full.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2018.intl.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2018.promise.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2018.regexp.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2019.array.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2019.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2019.full.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2019.object.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2019.string.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2019.symbol.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2020.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2020.full.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2020.string.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es2020.symbol.wellknown.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es5.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.es6.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.esnext.array.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.esnext.asynciterable.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.esnext.bigint.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.esnext.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.esnext.full.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.esnext.intl.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.esnext.symbol.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.scripthost.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.webworker.d.ts" t="IncludeRecursive" />
+              <e p="typescript/lib/lib.webworker.importscripts.d.ts" t="IncludeRecursive" />
+              <e p="upath" t="IncludeRecursive" />
+              <e p="webpack" t="IncludeRecursive" />
+              <e p="webpack-cli" t="IncludeRecursive" />
+            </e>
+            <e p="package-lock.json" t="Include" />
+            <e p="package.json" t="Include" />
+            <e p="src" t="Include">
+              <e p="components" t="Include">
+                <e p="AddTodoComponent.tsx" t="Include" />
+                <e p="App.tsx" t="Include" />
+                <e p="Footer.tsx" t="Include" />
+                <e p="Link.tsx" t="Include" />
+                <e p="Todo.tsx" t="Include" />
+                <e p="TodoList.tsx" t="Include" />
+              </e>
+              <e p="container" t="Include">
+                <e p="AddTodo.tsx" t="Include" />
+                <e p="FilterLink.ts" t="Include" />
+                <e p="VisibleTodoList.tsx" t="Include" />
+              </e>
+              <e p="index.tsx" t="Include" />
+              <e p="store" t="Include">
+                <e p="index.ts" t="Include" />
+                <e p="todo" t="Include">
+                  <e p="actions.ts" t="Include" />
+                  <e p="reducers.ts" t="Include" />
+                  <e p="types.ts" t="Include" />
+                </e>
+                <e p="visibility" t="Include">
+                  <e p="actions.ts" t="Include" />
+                  <e p="reducers.ts" t="Include" />
+                  <e p="types.ts" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="tsconfig.json" t="Include" />
+            <e p="webpack.config.js" t="Include" />
+          </e>
+        </e>
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />

@@ -97,7 +97,7 @@ namespace Blogger
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "ClientApp/React";
                 if (env.IsDevelopment())
                 {
                     
