@@ -7,7 +7,7 @@ import {VisibleTodoList} from "../container/VisibleTodoList";
 
 export const App = () =>
     <div>
-        <VisibleTodoList filter={VisibilityFilter.All}/>
+        <VisibleTodoList/>
         <AddTodo />
         <Footer/>
     </div>

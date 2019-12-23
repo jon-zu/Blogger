@@ -5,6 +5,18 @@ import {Todo, TodoState} from "../store/todo/types";
 import {TodoVisibilityState, VisibilityFilter} from "../store/visibility/types";
 import {toggleTodo} from "../store/todo/actions";
 
+
+
+interface OwnProps {
+    todos: Todo[]
+}
+
+interface DispatchProps {
+    onTodoClicked: (id: number) => void
+};
+
+type CompProps = OwnProps & DispatchProps;
+
 const getVisibleTodos = (todo: TodoState, vis: TodoVisibilityState) => {
     switch (vis.filter) {
         case VisibilityFilter.Active:
@@ -17,7 +29,7 @@ const getVisibleTodos = (todo: TodoState, vis: TodoVisibilityState) => {
     return todo.todos;
 };
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: RootState): OwnProps => ({
   todos: getVisibleTodos(state.todo, state.visibility)  
 });
 
@@ -26,7 +38,7 @@ const mapDispatchToProps = {
 };
 
 
-export const VisibleTodoList = connect<any, any, any>(
+export const VisibleTodoList = connect(
     mapStateToProps,
     mapDispatchToProps
 )(TodoList);

@@ -2,7 +2,6 @@ import {addTodo} from "../store/todo/actions";
 import * as React from "react";
 import {FormEvent} from "react";
 import {Simulate} from "react-dom/test-utils";
-import input = Simulate.input;
 
 interface Props {
     handleAdd: (text: string) => void
@@ -24,8 +23,8 @@ export class AddTodoComponent extends  React.Component<Props, State> {
     
     handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        //if(this.state.text.trim())
-         //   return;
+        if(!this.state.text.trim())
+            return;
         
         this.props.handleAdd(this.state.text);
         this.setState({text: ""});
