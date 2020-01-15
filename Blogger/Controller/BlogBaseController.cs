@@ -3,11 +3,20 @@ using System.Threading.Tasks;
 using Blogger.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Blogger.Controller
 {
+    [Authorize(AuthenticationSchemes = AuthSchemes)]
     public abstract class BlogBaseController : ControllerBase
     {
+       private const string AuthSchemes =
+            CookieAuthenticationDefaults.AuthenticationScheme + "," +
+            JwtBearerDefaults.AuthenticationScheme;
+
+
         protected BlogContext Context { get; }
         protected UserManager<User> UserManager { get; }
 

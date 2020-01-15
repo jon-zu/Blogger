@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Blogger.Controller
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BlogController: BlogBaseController
     {
         private readonly IAuthorizationService _authorizationService;

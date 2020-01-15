@@ -21,7 +21,6 @@ namespace Blogger.View
 
         public string Content { get; set; }
         
-        
 
         public string Title { get; set; }
 

@@ -13,7 +13,7 @@ namespace Blogger.Controller
 {
     [ApiController]
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ArticleController : BlogBaseController
     {
         private readonly IAuthorizationService _authorizationService;

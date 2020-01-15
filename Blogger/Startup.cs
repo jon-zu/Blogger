@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Blogger.Authorization;
 using Blogger.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Blogger
 {
@@ -43,12 +40,8 @@ namespace Blogger
                 .AddEntityFrameworkStores<BlogContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddAuthentication(opt =>
-                {
-                    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
+            services.AddAuthentication()
+                .AddCookie()
                 .AddJwtBearer(opt =>
                 {
                     opt.SaveToken = true;
@@ -98,7 +91,7 @@ namespace Blogger
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "WebApp/React";
+                spa.Options.SourcePath = "WebApp/blogger-react-app";
                 spa.UseReactDevelopmentServer("start");
                 if (env.IsDevelopment())
                 {

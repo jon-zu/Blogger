@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Blogger.Controller
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CommentController: BlogBaseController
     {
         private readonly IAuthorizationService _authorizationService;
@@ -25,7 +25,7 @@ namespace Blogger.Controller
         
         [HttpGet]
         [Route("ByArticle/{id:long}")]
-        public async Task<ActionResult<IList<CommentView>>> ForBlog(long id)
+        public async Task<ActionResult<IList<CommentView>>> ForArticle(long id)
         {
             var list = await Context.Comments
                 .Include(a => a.Owner)
