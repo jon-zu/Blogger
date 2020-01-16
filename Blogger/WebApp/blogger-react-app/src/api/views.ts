@@ -12,20 +12,14 @@ export interface BlogCreateView {
 export interface BlogView {
     id: number
     title: string
-    about: string
-}
-
-export interface ArticleView {
-    id: number
-    title: string
-    content: string
+    about: string,
     owner: UserView
 }
 
 export interface ArticleView {
     id: number
     title: string
-    about: string
+    content: string
     owner: UserView
 }
 
@@ -39,13 +33,6 @@ export interface CommentView {
     createdAt: Date
     content: string
     id: number
-    owner: UserView
-}
-
-export interface ArticleView {
-    id: number
-    title: string
-    about: string
     owner: UserView
 }
 

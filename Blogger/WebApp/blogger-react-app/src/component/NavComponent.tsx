@@ -1,5 +1,4 @@
 import React from 'react';
-import * as api from '../api/client';
 import * as v from '../api/views';
 import {
     Formik,
@@ -9,7 +8,7 @@ import {
 } from 'formik';
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../store';
-import { thunkLogin } from '../store/user';
+import { thunkLogin, thunkLoginCheck } from '../store/user';
 import { connect } from 'react-redux'
 import { thunkLoadBlogs } from '../store/blog';
 import { Link } from "react-router-dom";
@@ -24,6 +23,7 @@ interface OwnProps {
 
 interface DispatchProps {
     login: (username: string, password: string) => Promise<void>
+    login_check: () => Promise<void>
     refresh_blogs: () => Promise<void>
 }
 
@@ -48,6 +48,7 @@ export class NavComponent extends React.Component<Props, State> {
     }
 
     async componentDidMount() {
+        await this.props.login_check();
         await this.props.refresh_blogs();
     }
 
@@ -60,25 +61,26 @@ export class NavComponent extends React.Component<Props, State> {
         var { blogs, user } = this.props;
         var isLoggedIn = user != undefined;
 
-        return <div>
+        return <>
             {isLoggedIn ?
                 <>
-                    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
 
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav mr-auto">
-                                <a className="navbar-brand" href="#">Blogger</a>
-                                <li key="home" className="nav-item active">
-                                    <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-                                </li>
-                                {blogs?.map(blog => 
+                            <ul className="navbar-nav">
+                                <Link to="/" className="navbar-brand">Blogger</Link>
+                                {blogs?.map(blog =>
                                     <li key={`blog-${blog.id}`} className="nav-item">
-                                        <Link to={`/blog/${blog.id}`}>{blog.title}</Link>
+                                        <Link to={`/blog/${blog.id}`} className="nav-link">{blog.title}</Link>
                                     </li>)
                                 }
+                            </ul>
+
+                            <ul className="navbar-nav ml-auto">
+                                <Link to={`/blog/add`}><button className="btn btn-primary">Add Blog</button></Link>
                             </ul>
                         </div>
                     </nav>
@@ -101,7 +103,7 @@ export class NavComponent extends React.Component<Props, State> {
                         }
                     </Formik>
                 </>}
-        </div>
+        </>
     }
 }
 
@@ -116,14 +118,13 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>, ownProps: OwnP
     return {
         login: async (username, password) => {
             await dispatch(thunkLogin(username, password))
-            console.log("login");
             await dispatch(thunkLoadBlogs())
-            console.log("blog");
-            console.log('Login completed [UI]')
         },
         refresh_blogs: async () => {
             await dispatch(thunkLoadBlogs())
-            console.log("loading blogs...")
+        },
+        login_check: async () => {
+            await dispatch(thunkLoginCheck());
         }
     }
 }

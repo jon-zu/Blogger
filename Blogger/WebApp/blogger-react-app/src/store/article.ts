@@ -1,4 +1,4 @@
-import { ArticleView } from "../api/views";
+import { ArticleView, ArticleCreateView } from "../api/views";
 import { BlogClient } from "../api/client";
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
@@ -22,7 +22,30 @@ interface SelectArticleAction {
     payload: ArticleView
 }
 
-export type ArticleActionTypes = LoadArticlesAction | SelectArticleAction;
+export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+
+interface DeleteArticleAction {
+    type: typeof DELETE_ARTICLE,
+    payload: number
+}
+
+export const CREATE_ARTICLE = 'CREATE_ARTICLE';
+
+interface CreateArticleAction {
+    type: typeof CREATE_ARTICLE,
+    payload: ArticleView
+}
+
+export const UPDATE_ARTICLE = 'UPDATE_ARTICLE';
+
+interface UpdateArticleAction {
+    type: typeof UPDATE_ARTICLE,
+    payload: ArticleView
+}
+
+
+
+export type ArticleActionTypes = LoadArticlesAction | SelectArticleAction | DeleteArticleAction | CreateArticleAction | UpdateArticleAction;
 
 const initialState: ArticleState = {
     articles: [],
@@ -35,9 +58,15 @@ export function articleReducer(
 ): ArticleState {
     switch (action.type) {
         case LOAD_ARTICLES:
-            return { articles: action.payload, selectedArticle: state.selectedArticle };
+            return { ...state, articles: action.payload };
         case SELECT_ARTICLE:
-            return { articles: state.articles, selectedArticle: action.payload};
+            return { ...state, selectedArticle: action.payload};
+        case DELETE_ARTICLE:
+            return {selectedArticle: undefined, articles: state.articles.filter(a => a.id !== action.payload)};
+        case CREATE_ARTICLE:
+            return {...state, articles: [...state.articles, action.payload]};
+        case UPDATE_ARTICLE:
+            return {selectedArticle: action.payload, articles: state.articles.map(a => a.id === action.payload.id ? action.payload : a)}
         default:
             return state
     }
@@ -55,9 +84,37 @@ export const thunkLoadArticles = (blogId: number):
 
 export const thunkSelectArticle = (articleId: number): 
     ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var blog = await api.getArticle(articleId);
+    var article = await api.getArticle(articleId);
     dispatch({
         type: SELECT_ARTICLE,
-        payload: blog!
+        payload: article!
+    })
+}
+
+
+export const thunkDeleteArticle = (articleId: number): 
+    ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
+    await api.deleteArticle(articleId);
+    dispatch({
+        type: DELETE_ARTICLE,
+        payload: articleId
+    })
+}
+
+export const thunkCreateArticle = (articleCreateView: ArticleCreateView): 
+    ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
+    var article = await api.createArticle(articleCreateView);
+    dispatch({
+        type: CREATE_ARTICLE,
+        payload: article
+    })
+}
+
+export const thunkUpdateArticle = (articleId: number, articleUpdateView: ArticleCreateView): 
+    ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
+    var article = await api.updateArticle(articleId, articleUpdateView);
+    dispatch({
+        type: UPDATE_ARTICLE,
+        payload: article
     })
 }

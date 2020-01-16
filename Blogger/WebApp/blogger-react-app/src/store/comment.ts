@@ -1,4 +1,4 @@
-import { CommentView } from "../api/views";
+import { CommentView, CommentCreateView } from "../api/views";
 import { BlogClient } from "../api/client";
 import { Action } from 'redux'
 import { ThunkAction } from 'redux-thunk'
@@ -14,7 +14,28 @@ interface LoadCommentsAction {
     payload: CommentView[]
 }
 
-export type CommentActionTypes = LoadCommentsAction;
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+
+interface DeleteCommentAction {
+    type: typeof DELETE_COMMENT,
+    payload: number
+}
+
+export const CREATE_COMMENT = 'CREATE_COMMENT';
+
+interface CreateCommentAction {
+    type: typeof CREATE_COMMENT,
+    payload: CommentView
+}
+
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+
+interface UpdateCommentAction {
+    type: typeof UPDATE_COMMENT,
+    payload: CommentView
+}
+
+export type CommentActionTypes = LoadCommentsAction | DeleteCommentAction | CreateCommentAction | UpdateCommentAction;
 
 const initialState: CommentState = {
     comments: []
@@ -27,6 +48,13 @@ export function commentReducer(
     switch (action.type) {
         case LOAD_COMMENTS:
             return { comments: action.payload };
+            case DELETE_COMMENT:
+                return {...state, comments: state.comments.filter(a => a.id !== action.payload)};
+            case CREATE_COMMENT:
+                return {...state, comments: [...state.comments, action.payload]};
+            case UPDATE_COMMENT:
+                return {...state, comments: state.comments.map(a => a.id === action.payload.id ? action.payload : a)}
+            
         default:
             return state
     }
@@ -34,10 +62,43 @@ export function commentReducer(
 
 
 export const thunkLoadComments = (articleId: number): 
+    ThunkAction<void, CommentState, BlogClient, Action<string>> => {
+        return async (dispatch, _, api) => {
+            var comments = await api.getCommentsForArticle(articleId);
+            dispatch({
+                type: LOAD_COMMENTS,
+                payload: comments!
+            });
+        };
+    }
+
+export const thunkDeleteComment = (commentId: number): 
     ThunkAction<void, CommentState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var comments = await api.getCommentsForArticle(articleId);
+    await api.deleteComment(commentId);
     dispatch({
-        type: LOAD_COMMENTS,
-        payload: comments!
+        type: DELETE_COMMENT,
+        payload: commentId
     })
 }
+
+export const thunkCreateComment = (commentCreateView: CommentCreateView): 
+    ThunkAction<void, CommentState, BlogClient, Action<string>> => {
+        return async (dispatch, _, api) => {
+            var comment = await api.createComment(commentCreateView);
+            dispatch({
+                type: CREATE_COMMENT,
+                payload: comment
+            });
+        };
+    }
+
+export const thunkUpdateComment = (commentId: number, commentUpdateView: CommentCreateView): 
+    ThunkAction<void, CommentState, BlogClient, Action<string>> => {
+        return async (dispatch, _, api) => {
+            var comment = await api.updateComment(commentId, commentUpdateView);
+            dispatch({
+                type: UPDATE_COMMENT,
+                payload: comment
+            });
+        };
+    }

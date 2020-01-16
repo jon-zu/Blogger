@@ -1,9 +1,8 @@
 import * as rm from 'typed-rest-client/RestClient'
-import * as bh from 'typed-rest-client/handlers/bearertoken';
 import * as v from './views';
 
 
-enum ErrorCode {
+export enum ErrorCode {
     Auth,
     InvalidLogin,
     App
@@ -13,7 +12,7 @@ function delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
 }
 
-class ClientError extends Error {
+export class ClientError extends Error {
     errorCode: ErrorCode
 
     constructor(errorCode: ErrorCode, msg: string | undefined) {
@@ -65,8 +64,8 @@ export class BlogClient {
         return resp.result!;
     }
 
-    private async update<TData, TOut>(url: string, update: TData): Promise<TOut> {
-        var resp = await this.client.update<TOut>(url, update);
+    private async replace<TData, TOut>(url: string, update: TData): Promise<TOut> {
+        var resp = await this.client.replace<TOut>(url, update);
         this.checkStatus(resp.statusCode, url);
 
         return resp.result!;
@@ -132,8 +131,8 @@ export class BlogClient {
         return this.create("/api/Blog", blog);
     }
 
-    async updateBlog(id: number, blog: v.BlogCreateView) {
-        return this.update(`/api/Blog/${id}`, blog);
+    async updateBlog(id: number, blog: v.BlogCreateView): Promise<v.BlogView> {
+        return this.replace(`/api/Blog/${id}`, blog);
     }
 
     async deleteBlog(id: number) {
@@ -152,8 +151,8 @@ export class BlogClient {
         return this.create(`/api/Article`, article);
     }
 
-    async updateArticle(id: number, article: v.ArticleCreateView) {
-        return this.update(`/api/Article/${id}`, article);
+    async updateArticle(id: number, article: v.ArticleCreateView): Promise<v.ArticleView> {
+        return this.replace(`/api/Article/${id}`, article);
     }
 
     async deleteArticle(id: number) {
@@ -172,8 +171,8 @@ export class BlogClient {
         return this.create(`/api/Comment`, Comment);
     }
 
-    async updateComment(id: number, Comment: v.CommentCreateView) {
-        return this.update(`/api/Comment/${id}`, Comment);
+    async updateComment(id: number, Comment: v.CommentCreateView) : Promise<v.CommentView>{
+        return this.replace(`/api/Comment/${id}`, Comment);
     }
 
     async deleteComment(id: number) {
