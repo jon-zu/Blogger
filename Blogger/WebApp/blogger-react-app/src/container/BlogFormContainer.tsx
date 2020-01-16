@@ -1,34 +1,33 @@
-import * as v from '../api/views';
-import React from 'react';
 import {
-    Formik,
-    Form,
     Field,
-} from 'formik';
-import { RootState } from '../store';
-import { ThunkDispatch } from 'redux-thunk';
-import { connect } from 'react-redux';
-import { thunkCreateBlog, thunkUpdateBlog } from '../store/blog';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-
+    Form,
+    Formik,
+} from "formik";
+import React from "react";
+import { connect } from "react-redux";
+import { RouteComponentProps, withRouter } from "react-router-dom";
+import { ThunkDispatch } from "redux-thunk";
+import * as v from "../api/views";
+import { RootState } from "../store";
+import { thunkCreateBlog, thunkUpdateBlog } from "../store/blog";
 
 interface OwnProps {
-    isUpdatingBlog: boolean
+    isUpdatingBlog: boolean;
 }
 
 interface DispatchProps {
-    updateBlog: (blogId: number, blogUpdate: v.BlogCreateView) => Promise<void>
-    addBlog: (blogAdd: v.BlogCreateView) => Promise<void>
+    updateBlog: (blogId: number, blogUpdate: v.BlogCreateView) => Promise<void>;
+    addBlog: (blogAdd: v.BlogCreateView) => Promise<void>;
 }
 
 interface StateProps {
-    blog: v.BlogView | undefined
+    blog: v.BlogView | undefined;
 }
 
-type Props = StateProps & OwnProps & DispatchProps & RouteComponentProps
+type Props = StateProps & OwnProps & DispatchProps & RouteComponentProps;
 
-type State = {
-};
+interface State {
+}
 
 export class BlogFormComponent extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -38,7 +37,7 @@ export class BlogFormComponent extends React.Component<Props, State> {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    async handleClick(value: v.BlogCreateView) {
+    public async handleClick(value: v.BlogCreateView) {
         if (this.props.isUpdatingBlog) {
             await this.props.updateBlog(this.props.blog!.id, value);
         } else {
@@ -48,8 +47,7 @@ export class BlogFormComponent extends React.Component<Props, State> {
         this.props.history.goBack();
     }
 
-
-    render() {
+    public render() {
         const isEditing = this.props.isUpdatingBlog;
 
         const initialValues: v.BlogCreateView = (isEditing ?
@@ -58,17 +56,18 @@ export class BlogFormComponent extends React.Component<Props, State> {
             { title: "A Blog", about: "About some stuff" }
         );
 
-        return <Formik initialValues={initialValues}
+        return <Formik 
+            initialValues={initialValues}
             onSubmit={this.handleClick}>{(props) =>
                 <Form>
                     <div className="form-group">
                         <label htmlFor="title">Title</label>
-                        <Field name="title" className="form-control" />
+                        <Field type="text" name="title" className="form-control" />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="about">About</label>
-                        <Field name="about" className="form-control"/>
+                        <Field type="text" name="about" className="form-control"/>
                     </div>
 
                     <button type="submit" className="btn btn-primary" disabled={props.isSubmitting}>
@@ -82,9 +81,9 @@ export class BlogFormComponent extends React.Component<Props, State> {
 
 const mapStateToProps = (states: RootState): StateProps => {
     return {
-        blog: states.blog.selectedBlog
-    }
-}
+        blog: states.blog.selectedBlog,
+    };
+};
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
     return {
@@ -93,11 +92,11 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps
         },
         updateBlog: async (blogId: number, update: v.BlogCreateView) => {
             await dispatch(thunkUpdateBlog(blogId, update));
-        }
-    }
-}
+        },
+    };
+};
 
 export const FCBlogForm = connect(
     mapStateToProps,
-    mapDispatchToProps
-)(withRouter(BlogFormComponent))
+    mapDispatchToProps,
+)(withRouter(BlogFormComponent));

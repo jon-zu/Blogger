@@ -1,117 +1,116 @@
-import { BlogView, BlogCreateView } from "../api/views";
+import { Action } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { BlogClient } from "../api/client";
-import { Action } from 'redux'
-import { ThunkAction } from 'redux-thunk'
+import { BlogCreateView, BlogView } from "../api/views";
 
 export interface BlogState {
-    blogs: BlogView[]
-    selectedBlog: BlogView | undefined
+    blogs: BlogView[];
+    selectedBlog: BlogView | undefined;
 }
 
-export const LOAD_BLOGS = 'LOAD_BLOGS';
+export const LOAD_BLOGS = "LOAD_BLOGS";
 
 interface LoadBlogsAction {
-    type: typeof LOAD_BLOGS,
-    payload: BlogView[]
+    type: typeof LOAD_BLOGS;
+    payload: BlogView[];
 }
 
-export const SELECT_BLOG = 'SELECT_BLOG';
+export const SELECT_BLOG = "SELECT_BLOG";
 
 interface SelectBlogAction {
-    type: typeof SELECT_BLOG,
-    payload: BlogView
+    type: typeof SELECT_BLOG;
+    payload: BlogView;
 }
 
-export const DELETE_BLOG = 'DELETE_BLOG';
+export const DELETE_BLOG = "DELETE_BLOG";
 
 interface DeleteBlogAction {
-    type: typeof DELETE_BLOG,
-    payload: number
+    type: typeof DELETE_BLOG;
+    payload: number;
 }
 
-export const CREATE_BLOG = 'CREATE_BLOG';
+export const CREATE_BLOG = "CREATE_BLOG";
 
 interface CreateBlogAction {
-    type: typeof CREATE_BLOG,
-    payload: BlogView
+    type: typeof CREATE_BLOG;
+    payload: BlogView;
 }
 
-export const UPDATE_BLOG = 'UPDATE_BLOG';
+export const UPDATE_BLOG = "UPDATE_BLOG";
 
 interface UpdateBlogAction {
-    type: typeof UPDATE_BLOG,
-    payload: BlogView
+    type: typeof UPDATE_BLOG;
+    payload: BlogView;
 }
 
 export type BlogActionTypes = LoadBlogsAction | SelectBlogAction | DeleteBlogAction | CreateBlogAction | UpdateBlogAction;
 
 const initialState: BlogState = {
     blogs: [],
-    selectedBlog: undefined
+    selectedBlog: undefined,
 };
 
 export function blogReducer(
     state = initialState,
-    action: BlogActionTypes
+    action: BlogActionTypes,
 ): BlogState {
     switch (action.type) {
         case LOAD_BLOGS:
             return { blogs: action.payload, selectedBlog: state.selectedBlog };
         case SELECT_BLOG:
-            return { blogs: state.blogs, selectedBlog: action.payload}
+            return { blogs: state.blogs, selectedBlog: action.payload};
         case DELETE_BLOG:
-            return {selectedBlog: undefined, blogs: state.blogs.filter(a => a.id !== action.payload)};
+            return {selectedBlog: undefined, blogs: state.blogs.filter((a) => a.id !== action.payload)};
         case CREATE_BLOG:
             return {...state, blogs: [...state.blogs, action.payload]};
         case UPDATE_BLOG:
-            return {selectedBlog: action.payload, blogs: state.blogs.map(a => a.id === action.payload.id ? action.payload : a)}
+            return {selectedBlog: action.payload, blogs: state.blogs.map((a) => a.id === action.payload.id ? action.payload : a)};
         default:
-            return state
+            return state;
     }
 }
 
-
-export const thunkLoadBlogs = (): 
+export const thunkLoadBlogs = ():
     ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var blogs = await api.getBlogs();
+    const blogs = await api.getBlogs();
     dispatch({
         type: LOAD_BLOGS,
-        payload: blogs!
-    })
-}
+        payload: blogs!,
+    });
+};
 
-export const thunkSelectBlog = (blogId: number): 
+export const thunkSelectBlog = (blogId: number):
     ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var blog = await api.getBlog(blogId);
+    const blog = await api.getBlog(blogId);
     dispatch({
         type: SELECT_BLOG,
-        payload: blog!
-    })
-}
+        payload: blog!,
+    });
+};
 
-export const thunkDeleteBlog = (blogId: number): 
+export const thunkDeleteBlog = (blogId: number):
     ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
     await api.deleteBlog(blogId);
     dispatch({
         type: DELETE_BLOG,
-        payload: blogId
-    })
-}
+        payload: blogId,
+    });
+};
 
-export const thunkCreateBlog = (blogCreateView: BlogCreateView): 
+export const thunkCreateBlog = (blogCreateView: BlogCreateView):
     ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var blog = await api.createBlog(blogCreateView);
+    const blog = await api.createBlog(blogCreateView);
     dispatch({
         type: CREATE_BLOG,
-        payload: blog
-    })
-}
+        payload: blog,
+    });
+};
 
-export const thunkUpdateBlog = (blogId: number, blogUpdateView: BlogCreateView): 
+export const thunkUpdateBlog = (blogId: number, blogUpdateView: BlogCreateView):
     ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var blog = await api.updateBlog(blogId, blogUpdateView);
+    const blog = await api.updateBlog(blogId, blogUpdateView);
     dispatch({
         type: UPDATE_BLOG,
-        payload: blog
-    })
-}
+        payload: blog,
+    });
+};

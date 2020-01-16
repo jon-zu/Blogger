@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-type Props = {
+interface Props {
 
-};
+}
 
-type State = {
+interface State {
 
-};
+}
 
 export class CommentComponent extends React.Component<Props, State> {
 }

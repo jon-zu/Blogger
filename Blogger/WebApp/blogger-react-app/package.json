@@ -23,8 +23,7 @@
     "react-scripts": "3.3.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "typed-rest-client": "^1.7.1",
-    "typescript": "^3.7.4"
+    "typed-rest-client": "^1.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tslint": "^5.20.1",
+    "tslint-react": "^4.1.0",
+    "typescript": "^3.7.5"
   }
 }

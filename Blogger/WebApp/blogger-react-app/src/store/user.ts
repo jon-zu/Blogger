@@ -1,42 +1,41 @@
-import { UserView } from "../api/views";
+import { Action } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { BlogClient, ClientError, ErrorCode } from "../api/client";
-import { Action } from 'redux'
-import { ThunkAction } from 'redux-thunk'
+import { UserView } from "../api/views";
 
 export interface UserState {
-    currentUser: UserView | undefined
+    currentUser: UserView | undefined;
 }
 
-export const LOGIN_USER = 'LOGIN_USER';
+export const LOGIN_USER = "LOGIN_USER";
 
 interface LoginUserAction {
-    type: typeof LOGIN_USER,
-    payload: UserView
+    type: typeof LOGIN_USER;
+    payload: UserView;
 }
 
-
-export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOGOUT_USER = "LOGOUT_USER";
 
 interface LogoutUserAction {
-    type: typeof LOGOUT_USER
+    type: typeof LOGOUT_USER;
 }
 
-export const LOGIN_CHECK = 'LOGIN_CHECK';
+export const LOGIN_CHECK = "LOGIN_CHECK";
 
 interface LoginCheckAction {
-    type: typeof LOGIN_CHECK
-    payload: UserView | undefined
+    type: typeof LOGIN_CHECK;
+    payload: UserView | undefined;
 }
 
 export type UserActionTypes = LoginUserAction | LogoutUserAction | LoginCheckAction;
 
 const initialState: UserState = {
-    currentUser: undefined
+    currentUser: undefined,
 };
 
 export function userReducer(
     state = initialState,
-    action: UserActionTypes
+    action: UserActionTypes,
 ): UserState {
     switch (action.type) {
         case LOGIN_USER:
@@ -44,48 +43,46 @@ export function userReducer(
         case LOGOUT_USER:
             return { currentUser: undefined };
         case LOGIN_CHECK:
-            return {currentUser: action.payload}
+            return {currentUser: action.payload};
         default:
-            return state
+            return state;
     }
 }
 
-
 export const thunkLogin = (
     username: string,
-    password: string
+    password: string,
 ): ThunkAction<void, UserState, BlogClient, Action<string>> => async (dispatch, getState, api) => {
     await api.login({
-        username: username,
-        password: password
+        username,
+        password,
     });
 
-    var user = await api.currentUser();
+    const user = await api.currentUser();
     dispatch({
         type: LOGIN_USER,
-        payload: user!
-    })
-}
+        payload: user!,
+    });
+};
 
-export const thunkLoginCheck = (): 
+export const thunkLoginCheck = ():
     ThunkAction<void, UserState, BlogClient, Action<string>> => {
         return async (dispatch, getState, api) => {
-            var user = undefined;
+            let user;
             try {
                 user = await api.currentUser();
-            }
-            catch (err) {
+            } catch (err) {
                 if (err instanceof ClientError) {
-                    if (err.errorCode !== ErrorCode.Auth)
+                    if (err.errorCode !== ErrorCode.Auth) {
                         throw err;
-                }
-                else {
+                    }
+                } else {
                     throw err;
                 }
             }
             dispatch({
                 type: LOGIN_CHECK,
-                payload: user
+                payload: user,
             });
         };
-    }
+    };

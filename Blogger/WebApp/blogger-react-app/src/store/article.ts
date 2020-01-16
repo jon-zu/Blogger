@@ -1,60 +1,60 @@
-import { ArticleView, ArticleCreateView } from "../api/views";
+import { Action } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { BlogClient } from "../api/client";
-import { Action } from 'redux'
-import { ThunkAction } from 'redux-thunk'
+import { ArticleCreateView, ArticleView } from "../api/views";
 
 export interface ArticleState {
-    articles: ArticleView[]
-    selectedArticle: ArticleView | undefined
+    articles: ArticleView[];
+    selectedArticle: ArticleView | undefined;
 }
 
-export const LOAD_ARTICLES = 'LOAD_ARTICLES';
+export const LOAD_ARTICLES = "LOAD_ARTICLES";
 
 interface LoadArticlesAction {
-    type: typeof LOAD_ARTICLES,
-    payload: ArticleView[]
+    type: typeof LOAD_ARTICLES;
+    payload: ArticleView[];
 }
 
-export const SELECT_ARTICLE = 'SELECT_ARTICLE';
+export const SELECT_ARTICLE = "SELECT_ARTICLE";
 
 interface SelectArticleAction {
-    type: typeof SELECT_ARTICLE,
-    payload: ArticleView
+    type: typeof SELECT_ARTICLE;
+    payload: ArticleView;
 }
 
-export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+export const DELETE_ARTICLE = "DELETE_ARTICLE";
 
 interface DeleteArticleAction {
-    type: typeof DELETE_ARTICLE,
-    payload: number
+    type: typeof DELETE_ARTICLE;
+    payload: number;
 }
 
-export const CREATE_ARTICLE = 'CREATE_ARTICLE';
+export const CREATE_ARTICLE = "CREATE_ARTICLE";
 
 interface CreateArticleAction {
-    type: typeof CREATE_ARTICLE,
-    payload: ArticleView
+    type: typeof CREATE_ARTICLE;
+    payload: ArticleView;
 }
 
-export const UPDATE_ARTICLE = 'UPDATE_ARTICLE';
+export const UPDATE_ARTICLE = "UPDATE_ARTICLE";
 
 interface UpdateArticleAction {
-    type: typeof UPDATE_ARTICLE,
-    payload: ArticleView
+    type: typeof UPDATE_ARTICLE;
+    payload: ArticleView;
 }
 
-
-
-export type ArticleActionTypes = LoadArticlesAction | SelectArticleAction | DeleteArticleAction | CreateArticleAction | UpdateArticleAction;
+export type ArticleActionTypes = LoadArticlesAction |
+    SelectArticleAction | DeleteArticleAction |
+    CreateArticleAction | UpdateArticleAction;
 
 const initialState: ArticleState = {
     articles: [],
-    selectedArticle: undefined
+    selectedArticle: undefined,
 };
 
 export function articleReducer(
     state = initialState,
-    action: ArticleActionTypes
+    action: ArticleActionTypes,
 ): ArticleState {
     switch (action.type) {
         case LOAD_ARTICLES:
@@ -62,59 +62,60 @@ export function articleReducer(
         case SELECT_ARTICLE:
             return { ...state, selectedArticle: action.payload};
         case DELETE_ARTICLE:
-            return {selectedArticle: undefined, articles: state.articles.filter(a => a.id !== action.payload)};
+            return {selectedArticle: undefined, articles: state.articles.filter((a) => a.id !== action.payload)};
         case CREATE_ARTICLE:
             return {...state, articles: [...state.articles, action.payload]};
         case UPDATE_ARTICLE:
-            return {selectedArticle: action.payload, articles: state.articles.map(a => a.id === action.payload.id ? action.payload : a)}
+            return {
+                articles: state.articles.map((a) => a.id === action.payload.id ? action.payload : a),
+                selectedArticle: action.payload
+            };
         default:
-            return state
+            return state;
     }
 }
 
-
-export const thunkLoadArticles = (blogId: number): 
+export const thunkLoadArticles = (blogId: number):
     ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var articles = await api.getArticlesForBlog(blogId);
+    const articles = await api.getArticlesForBlog(blogId);
     dispatch({
         type: LOAD_ARTICLES,
-        payload: articles!
-    })
-}
+        payload: articles!,
+    });
+};
 
-export const thunkSelectArticle = (articleId: number): 
+export const thunkSelectArticle = (articleId: number):
     ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var article = await api.getArticle(articleId);
+    const article = await api.getArticle(articleId);
     dispatch({
         type: SELECT_ARTICLE,
-        payload: article!
-    })
-}
+        payload: article!,
+    });
+};
 
-
-export const thunkDeleteArticle = (articleId: number): 
+export const thunkDeleteArticle = (articleId: number):
     ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
     await api.deleteArticle(articleId);
     dispatch({
         type: DELETE_ARTICLE,
-        payload: articleId
-    })
-}
+        payload: articleId,
+    });
+};
 
-export const thunkCreateArticle = (articleCreateView: ArticleCreateView): 
+export const thunkCreateArticle = (articleCreateView: ArticleCreateView):
     ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var article = await api.createArticle(articleCreateView);
+    const article = await api.createArticle(articleCreateView);
     dispatch({
         type: CREATE_ARTICLE,
-        payload: article
-    })
-}
+        payload: article,
+    });
+};
 
-export const thunkUpdateArticle = (articleId: number, articleUpdateView: ArticleCreateView): 
+export const thunkUpdateArticle = (articleId: number, articleUpdateView: ArticleCreateView):
     ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    var article = await api.updateArticle(articleId, articleUpdateView);
+    const article = await api.updateArticle(articleId, articleUpdateView);
     dispatch({
         type: UPDATE_ARTICLE,
-        payload: article
-    })
-}
+        payload: article,
+    });
+};
