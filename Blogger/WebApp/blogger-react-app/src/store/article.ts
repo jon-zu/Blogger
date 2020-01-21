@@ -2,6 +2,7 @@ import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { BlogClient } from "../api/client";
 import { ArticleCreateView, ArticleView } from "../api/views";
+import { BlogThunkResult } from ".";
 
 export interface ArticleState {
     articles: ArticleView[];
@@ -60,15 +61,15 @@ export function articleReducer(
         case LOAD_ARTICLES:
             return { ...state, articles: action.payload };
         case SELECT_ARTICLE:
-            return { ...state, selectedArticle: action.payload};
+            return { ...state, selectedArticle: action.payload };
         case DELETE_ARTICLE:
-            return {selectedArticle: undefined, articles: state.articles.filter((a) => a.id !== action.payload)};
+            return { selectedArticle: undefined, articles: state.articles.filter((a) => a.id !== action.payload) };
         case CREATE_ARTICLE:
-            return {...state, articles: [...state.articles, action.payload]};
+            return { ...state, articles: [...state.articles, action.payload] };
         case UPDATE_ARTICLE:
             return {
                 articles: state.articles.map((a) => a.id === action.payload.id ? action.payload : a),
-                selectedArticle: action.payload
+                selectedArticle: action.payload,
             };
         default:
             return state;
@@ -76,46 +77,46 @@ export function articleReducer(
 }
 
 export const thunkLoadArticles = (blogId: number):
-    ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
     const articles = await api.getArticlesForBlog(blogId);
     dispatch({
-        type: LOAD_ARTICLES,
         payload: articles!,
+        type: LOAD_ARTICLES,
     });
 };
 
 export const thunkSelectArticle = (articleId: number):
-    ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
     const article = await api.getArticle(articleId);
     dispatch({
-        type: SELECT_ARTICLE,
         payload: article!,
+        type: SELECT_ARTICLE,
     });
 };
 
 export const thunkDeleteArticle = (articleId: number):
-    ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
     await api.deleteArticle(articleId);
     dispatch({
-        type: DELETE_ARTICLE,
         payload: articleId,
+        type: DELETE_ARTICLE,
     });
 };
 
 export const thunkCreateArticle = (articleCreateView: ArticleCreateView):
-    ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
     const article = await api.createArticle(articleCreateView);
     dispatch({
-        type: CREATE_ARTICLE,
         payload: article,
+        type: CREATE_ARTICLE,
     });
 };
 
 export const thunkUpdateArticle = (articleId: number, articleUpdateView: ArticleCreateView):
-    ThunkAction<void, ArticleState, BlogClient, Action<string>> => async (dispatch, _, api) => {
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
     const article = await api.updateArticle(articleId, articleUpdateView);
     dispatch({
-        type: UPDATE_ARTICLE,
         payload: article,
+        type: UPDATE_ARTICLE,
     });
 };

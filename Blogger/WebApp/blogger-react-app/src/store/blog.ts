@@ -2,6 +2,7 @@ import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { BlogClient } from "../api/client";
 import { BlogCreateView, BlogView } from "../api/views";
+import { BlogThunkResult } from ".";
 
 export interface BlogState {
     blogs: BlogView[];
@@ -43,7 +44,8 @@ interface UpdateBlogAction {
     payload: BlogView;
 }
 
-export type BlogActionTypes = LoadBlogsAction | SelectBlogAction | DeleteBlogAction | CreateBlogAction | UpdateBlogAction;
+export type BlogActionTypes = LoadBlogsAction | SelectBlogAction |
+    DeleteBlogAction | CreateBlogAction | UpdateBlogAction;
 
 const initialState: BlogState = {
     blogs: [],
@@ -58,59 +60,62 @@ export function blogReducer(
         case LOAD_BLOGS:
             return { blogs: action.payload, selectedBlog: state.selectedBlog };
         case SELECT_BLOG:
-            return { blogs: state.blogs, selectedBlog: action.payload};
+            return { blogs: state.blogs, selectedBlog: action.payload };
         case DELETE_BLOG:
-            return {selectedBlog: undefined, blogs: state.blogs.filter((a) => a.id !== action.payload)};
+            return { selectedBlog: undefined, blogs: state.blogs.filter((a) => a.id !== action.payload) };
         case CREATE_BLOG:
-            return {...state, blogs: [...state.blogs, action.payload]};
+            return { ...state, blogs: [...state.blogs, action.payload] };
         case UPDATE_BLOG:
-            return {selectedBlog: action.payload, blogs: state.blogs.map((a) => a.id === action.payload.id ? action.payload : a)};
+            return {
+                blogs: state.blogs.map((a) => a.id === action.payload.id ? action.payload : a),
+                selectedBlog: action.payload,
+            };
         default:
             return state;
     }
 }
 
 export const thunkLoadBlogs = ():
-    ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    const blogs = await api.getBlogs();
-    dispatch({
-        type: LOAD_BLOGS,
-        payload: blogs!,
-    });
-};
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
+        const blogs = await api.getBlogs();
+        dispatch({
+            payload: blogs!,
+            type: LOAD_BLOGS,
+        });
+    };
 
 export const thunkSelectBlog = (blogId: number):
-    ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    const blog = await api.getBlog(blogId);
-    dispatch({
-        type: SELECT_BLOG,
-        payload: blog!,
-    });
-};
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
+        const blog = await api.getBlog(blogId);
+        dispatch({
+            payload: blog!,
+            type: SELECT_BLOG,
+        });
+    };
 
 export const thunkDeleteBlog = (blogId: number):
-    ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    await api.deleteBlog(blogId);
-    dispatch({
-        type: DELETE_BLOG,
-        payload: blogId,
-    });
-};
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
+        await api.deleteBlog(blogId);
+        dispatch({
+            type: DELETE_BLOG,
+            payload: blogId,
+        });
+    };
 
 export const thunkCreateBlog = (blogCreateView: BlogCreateView):
-    ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    const blog = await api.createBlog(blogCreateView);
-    dispatch({
-        type: CREATE_BLOG,
-        payload: blog,
-    });
-};
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
+        const blog = await api.createBlog(blogCreateView);
+        dispatch({
+            type: CREATE_BLOG,
+            payload: blog,
+        });
+    };
 
 export const thunkUpdateBlog = (blogId: number, blogUpdateView: BlogCreateView):
-    ThunkAction<void, BlogState, BlogClient, Action<string>> => async (dispatch, _, api) => {
-    const blog = await api.updateBlog(blogId, blogUpdateView);
-    dispatch({
-        type: UPDATE_BLOG,
-        payload: blog,
-    });
-};
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
+        const blog = await api.updateBlog(blogId, blogUpdateView);
+        dispatch({
+            type: UPDATE_BLOG,
+            payload: blog,
+        });
+    };

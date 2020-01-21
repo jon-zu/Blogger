@@ -175,7 +175,6 @@ namespace Blogger.Tests.Integration
 
 
             //ToDo: create blog
-            const int blogId = 1;
             const int articleId = 1;
             CommentView newCommentData = null;
 

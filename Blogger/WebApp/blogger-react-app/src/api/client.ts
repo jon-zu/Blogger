@@ -20,6 +20,7 @@ export class ClientError extends Error {
     }
 }
 
+// tslint:disable-next-line: max-classes-per-file
 export class BlogClient {
     private token: v.AuthTokenView | undefined;
     private client: rm.RestClient;

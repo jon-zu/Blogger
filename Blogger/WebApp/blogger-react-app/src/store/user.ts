@@ -2,6 +2,7 @@ import { Action } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { BlogClient, ClientError, ErrorCode } from "../api/client";
 import { UserView } from "../api/views";
+import { BlogThunkResult } from ".";
 
 export interface UserState {
     currentUser: UserView | undefined;
@@ -43,7 +44,7 @@ export function userReducer(
         case LOGOUT_USER:
             return { currentUser: undefined };
         case LOGIN_CHECK:
-            return {currentUser: action.payload};
+            return { currentUser: action.payload };
         default:
             return state;
     }
@@ -52,7 +53,7 @@ export function userReducer(
 export const thunkLogin = (
     username: string,
     password: string,
-): ThunkAction<void, UserState, BlogClient, Action<string>> => async (dispatch, getState, api) => {
+): BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
     await api.login({
         username,
         password,
@@ -60,29 +61,27 @@ export const thunkLogin = (
 
     const user = await api.currentUser();
     dispatch({
-        type: LOGIN_USER,
         payload: user!,
+        type: LOGIN_USER,
     });
 };
 
 export const thunkLoginCheck = ():
-    ThunkAction<void, UserState, BlogClient, Action<string>> => {
-        return async (dispatch, getState, api) => {
-            let user;
-            try {
-                user = await api.currentUser();
-            } catch (err) {
-                if (err instanceof ClientError) {
-                    if (err.errorCode !== ErrorCode.Auth) {
-                        throw err;
-                    }
-                } else {
+    BlogThunkResult<Promise<void>> => async (dispatch, _, api) => {
+        let user;
+        try {
+            user = await api.currentUser() ?? undefined;
+        } catch (err) {
+            if (err instanceof ClientError) {
+                if (err.errorCode !== ErrorCode.Auth) {
                     throw err;
                 }
+            } else {
+                throw err;
             }
-            dispatch({
-                type: LOGIN_CHECK,
-                payload: user,
-            });
-        };
+        }
+        dispatch({
+            payload: user,
+            type: LOGIN_CHECK,
+        });
     };

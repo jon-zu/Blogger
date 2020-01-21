@@ -8,34 +8,22 @@ import { connect } from "react-redux";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { ThunkDispatch } from "redux-thunk";
 import * as v from "../api/views";
-import { RootState } from "../store";
+import { RootState, BlogThunkDispatch } from "../store";
 import { thunkCreateArticle, thunkUpdateArticle } from "../store/article";
 
-interface ArticleFormValues {
-    title: string;
-    content: string;
-}
+const initialArticleFormValues = {
+    content: "B",
+    title: "A",
+};
+
+type ArticleFormValues = typeof initialArticleFormValues;
 
 interface OwnProps {
     isUpdatingArticle: boolean;
 }
-
-interface DispatchProps {
-    updateArticle: (articleId: number, articleUpdate: v.ArticleCreateView) => Promise<void>;
-    addArticle: (articleAdd: v.ArticleCreateView) => Promise<void>;
-}
-
-interface StateProps {
-    article: v.ArticleView | undefined;
-    blog: v.BlogView | undefined;
-}
-
 type Props = StateProps & OwnProps & DispatchProps & RouteComponentProps;
 
-interface State {
-}
-
-export class ArticleFormComponent extends React.Component<Props, State> {
+export class ArticleFormComponent extends React.Component<Props> {
     constructor(props: Props) {
         super(props);
 
@@ -44,19 +32,19 @@ export class ArticleFormComponent extends React.Component<Props, State> {
     }
 
     public async handleClick(value: ArticleFormValues) {
-        if (this.props.isUpdatingArticle) {
+        const {isUpdatingArticle, article, blog} = this.props;
 
-            await this.props.updateArticle(this.props.article!.id, {
-                blogId: 0,
-                content: value.content,
-                title: value.title,
-            });
+        const newArticle = {
+            blogId: isUpdatingArticle ? 0 : blog!.id,
+            content: value.content,
+            title: value.title
+        };
+
+
+        if (isUpdatingArticle) {
+            await this.props.updateArticle(article!.id, newArticle);
         } else {
-            await this.props.addArticle({
-                blogId: this.props.blog!.id,
-                content: value.content,
-                title: value.title,
-            });
+            await this.props.addArticle(newArticle);
         }
 
         this.props.history.goBack();
@@ -68,7 +56,7 @@ export class ArticleFormComponent extends React.Component<Props, State> {
         const initialValues: ArticleFormValues = (isEditing ?
             { title: this.props.article!.title, content: this.props.article!.content }
             :
-            { title: "An Article", content: "Lorem" }
+            initialArticleFormValues
         );
 
         return <Formik initialValues={initialValues}
@@ -93,23 +81,24 @@ export class ArticleFormComponent extends React.Component<Props, State> {
     }
 }
 
-const mapStateToProps = (states: RootState): StateProps => {
+const mapStateToProps = (states: RootState) => {
     return {
         article: states.article.selectedArticle,
         blog: states.blog.selectedBlog,
     };
 };
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>): DispatchProps => {
+const mapDispatchToProps = (dispatch: BlogThunkDispatch) => {
     return {
-        addArticle: async (add: v.ArticleCreateView) => {
-            await dispatch(thunkCreateArticle(add));
-        },
-        updateArticle: async (articleId: number, update: v.ArticleCreateView) => {
-            await dispatch(thunkUpdateArticle(articleId, update));
-        },
+        addArticle: (add: v.ArticleCreateView) =>
+            dispatch(thunkCreateArticle(add)),
+        updateArticle: async (articleId: number, update: v.ArticleCreateView) =>
+            dispatch(thunkUpdateArticle(articleId, update)),
     };
 };
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 
 export const FCArticleForm = connect(
     mapStateToProps,

@@ -30,9 +30,7 @@ export interface IdMatchParams {
 export interface IdMatchProps extends RouteComponentProps<IdMatchParams> {
 }
 
-export interface NoMatchParams {}
-
-export interface NoMatchProps extends RouteComponentProps<NoMatchParams> {
+export interface NoMatchProps extends RouteComponentProps<{}> {
 }
 
 const NoMatch = (props: NoMatchProps) => (
